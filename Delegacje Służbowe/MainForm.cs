@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Delegacje_Służbowe
@@ -14,5 +9,50 @@ namespace Delegacje_Służbowe
         {
             InitializeComponent();
         }
+
+        ~MainForm()
+        {
+            Program.conn.Dispose();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.conn.Dispose();
+            this.Close();
+        }
+
+        private void listaPracownikówToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UsersList userslist= new UsersList();
+           
+            userslist.MdiParent = this;
+            userslist.Show();
+
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
+            timer1.Interval = 1000;//1 seconds
+            timer1.Tick += new EventHandler(Timer1_Tick);
+            timer1.Enabled = true;
+            timer1.Start();
+
+            
+        }
+
+        private void Timer1_Tick(object Sender, EventArgs e)
+        {
+            // Set the caption to the current time.  
+           
+            toolStripStatusLabel1.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+        }
+
     }
 }
