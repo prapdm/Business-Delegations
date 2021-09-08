@@ -11,6 +11,7 @@ namespace Delegacje_Służbowe
 {
     public partial class Form1 : Form
     {
+        public static int loged_user;
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace Delegacje_Służbowe
             var compiler = new SqlServerCompiler();
             var db = new QueryFactory(Program.conn.con, compiler);
 
-            var user =  db.Query("Users").Where("role", 5).Where("status", 1).Where("login", login).FirstOrDefault();
+            var user =  db.Query("Users").Where("status", 1).Where("login", login).FirstOrDefault();
 
             if (user != null)
             {
@@ -39,6 +40,7 @@ namespace Delegacje_Służbowe
                 {
 
                     Debug.WriteLine("Autoryzacja poprawna");
+                    loged_user = user.Id;
                     this.Hide();
                     MainForm mainform = new MainForm();
                     mainform.ShowDialog();
@@ -65,9 +67,6 @@ namespace Delegacje_Służbowe
 
             }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            this.AcceptButton = loginButton;
-        }
+      
     }
     }

@@ -15,24 +15,22 @@ namespace Delegacje_Służbowe
             Program.conn.Dispose();
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Program.conn.Dispose();
             this.Close();
         }
 
-        private void listaPracownikówToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ListaPracownikówToolStripMenuItem_Click(object sender, EventArgs e)
         {
             UsersList userslist= new UsersList();
-           
             userslist.MdiParent = this;
             userslist.Show();
-
 
         }
 
@@ -54,5 +52,14 @@ namespace Delegacje_Służbowe
             toolStripStatusLabel1.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
         }
 
+        private void passwordChangeStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ChangePassword(Form1.loged_user);
+        }
+
+        private void nowyPracownikToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new NewUser();
+        }
     }
 }

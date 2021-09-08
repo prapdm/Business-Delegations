@@ -72,6 +72,7 @@ namespace Delegacje_Służbowe
             this.newUserbutton.TabIndex = 4;
             this.newUserbutton.Text = "Nowy pracownik";
             this.newUserbutton.UseVisualStyleBackColor = true;
+            this.newUserbutton.Click += new System.EventHandler(this.NewUserbutton_Click);
             // 
             // textBox2
             // 
@@ -129,7 +130,8 @@ namespace Delegacje_Służbowe
             this.dataGridView1.RowTemplate.Height = 25;
             this.dataGridView1.Size = new System.Drawing.Size(684, 588);
             this.dataGridView1.TabIndex = 1;
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellDoubleClick);
+            this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_MouseClick);
             // 
             // id
             // 
@@ -211,8 +213,8 @@ namespace Delegacje_Służbowe
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.OperationsgroupBox);
             this.Name = "UsersList";
+            this.ShowIcon = false;
             this.Text = "Lista pracowników";
-            this.Load += new System.EventHandler(this.UsersList_Load);
             this.OperationsgroupBox.ResumeLayout(false);
             this.OperationsgroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

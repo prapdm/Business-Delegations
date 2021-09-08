@@ -1,7 +1,7 @@
 ﻿
 namespace Delegacje_Służbowe
 {
-    partial class EditUser
+    partial class NewUser
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +30,12 @@ namespace Delegacje_Służbowe
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.confirmPasswordlabel1 = new System.Windows.Forms.Label();
+            this.confirmPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.newPasswordtextBox = new System.Windows.Forms.TextBox();
             this.statusCheckBox = new System.Windows.Forms.CheckBox();
             this.rolaComboBox = new System.Windows.Forms.ComboBox();
             this.departamentComboBox = new System.Windows.Forms.ComboBox();
-            this.changePasswordButton = new System.Windows.Forms.Button();
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.nazwiskoTextBox = new System.Windows.Forms.TextBox();
             this.imieTexBox = new System.Windows.Forms.TextBox();
@@ -44,17 +46,18 @@ namespace Delegacje_Służbowe
             this.loginLabel = new System.Windows.Forms.Label();
             this.nazwiskoLabel = new System.Windows.Forms.Label();
             this.nameLabel = new System.Windows.Forms.Label();
-            this.saveUserButton = new System.Windows.Forms.Button();
-            this.confirmLabel = new System.Windows.Forms.Label();
+            this.addNewUserButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.confirmPasswordlabel1);
+            this.groupBox1.Controls.Add(this.confirmPasswordTextBox);
+            this.groupBox1.Controls.Add(this.newPasswordtextBox);
             this.groupBox1.Controls.Add(this.statusCheckBox);
             this.groupBox1.Controls.Add(this.rolaComboBox);
             this.groupBox1.Controls.Add(this.departamentComboBox);
-            this.groupBox1.Controls.Add(this.changePasswordButton);
             this.groupBox1.Controls.Add(this.loginTextBox);
             this.groupBox1.Controls.Add(this.nazwiskoTextBox);
             this.groupBox1.Controls.Add(this.imieTexBox);
@@ -67,187 +70,196 @@ namespace Delegacje_Służbowe
             this.groupBox1.Controls.Add(this.nameLabel);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(357, 263);
+            this.groupBox1.Size = new System.Drawing.Size(359, 301);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Dane użytkownika";
+            this.groupBox1.Text = "Dodawanie nowego użytkownika";
+            // 
+            // confirmPasswordlabel1
+            // 
+            this.confirmPasswordlabel1.AutoSize = true;
+            this.confirmPasswordlabel1.Location = new System.Drawing.Point(12, 161);
+            this.confirmPasswordlabel1.Name = "confirmPasswordlabel1";
+            this.confirmPasswordlabel1.Size = new System.Drawing.Size(84, 15);
+            this.confirmPasswordlabel1.TabIndex = 30;
+            this.confirmPasswordlabel1.Text = "Powtórz hasło:";
+            // 
+            // confirmPasswordTextBox
+            // 
+            this.confirmPasswordTextBox.Location = new System.Drawing.Point(123, 158);
+            this.confirmPasswordTextBox.Name = "confirmPasswordTextBox";
+            this.confirmPasswordTextBox.PasswordChar = '*';
+            this.confirmPasswordTextBox.Size = new System.Drawing.Size(204, 23);
+            this.confirmPasswordTextBox.TabIndex = 5;
+            // 
+            // newPasswordtextBox
+            // 
+            this.newPasswordtextBox.Location = new System.Drawing.Point(123, 125);
+            this.newPasswordtextBox.Name = "newPasswordtextBox";
+            this.newPasswordtextBox.PasswordChar = '*';
+            this.newPasswordtextBox.Size = new System.Drawing.Size(204, 23);
+            this.newPasswordtextBox.TabIndex = 4;
             // 
             // statusCheckBox
             // 
             this.statusCheckBox.AutoSize = true;
-            this.statusCheckBox.Location = new System.Drawing.Point(117, 208);
+            this.statusCheckBox.Location = new System.Drawing.Point(123, 253);
             this.statusCheckBox.Name = "statusCheckBox";
             this.statusCheckBox.Size = new System.Drawing.Size(220, 19);
-            this.statusCheckBox.TabIndex = 13;
+            this.statusCheckBox.TabIndex = 9;
             this.statusCheckBox.Text = "Konto użytkownika jest zablokowane";
             this.statusCheckBox.UseVisualStyleBackColor = true;
             // 
             // rolaComboBox
             // 
+            this.rolaComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.rolaComboBox.FormattingEnabled = true;
-            this.rolaComboBox.Location = new System.Drawing.Point(117, 179);
+            this.rolaComboBox.ItemHeight = 15;
+            this.rolaComboBox.Location = new System.Drawing.Point(123, 224);
             this.rolaComboBox.Name = "rolaComboBox";
             this.rolaComboBox.Size = new System.Drawing.Size(204, 23);
-            this.rolaComboBox.TabIndex = 12;
+            this.rolaComboBox.TabIndex = 8;
             // 
             // departamentComboBox
             // 
+            this.departamentComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.departamentComboBox.FormattingEnabled = true;
-            this.departamentComboBox.Location = new System.Drawing.Point(117, 150);
+            this.departamentComboBox.Location = new System.Drawing.Point(123, 192);
             this.departamentComboBox.Name = "departamentComboBox";
             this.departamentComboBox.Size = new System.Drawing.Size(204, 23);
-            this.departamentComboBox.TabIndex = 11;
-            // 
-            // changePasswordButton
-            // 
-            this.changePasswordButton.Location = new System.Drawing.Point(117, 121);
-            this.changePasswordButton.Name = "changePasswordButton";
-            this.changePasswordButton.Size = new System.Drawing.Size(95, 23);
-            this.changePasswordButton.TabIndex = 10;
-            this.changePasswordButton.Text = "Zmień hasło";
-            this.changePasswordButton.UseVisualStyleBackColor = true;
-            this.changePasswordButton.Click += new System.EventHandler(this.ChangePasswordButton_Click);
+            this.departamentComboBox.TabIndex = 7;
             // 
             // loginTextBox
             // 
-            this.loginTextBox.Location = new System.Drawing.Point(117, 92);
+            this.loginTextBox.Location = new System.Drawing.Point(123, 92);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(204, 23);
-            this.loginTextBox.TabIndex = 9;
+            this.loginTextBox.TabIndex = 3;
             // 
             // nazwiskoTextBox
             // 
-            this.nazwiskoTextBox.Location = new System.Drawing.Point(117, 63);
+            this.nazwiskoTextBox.Location = new System.Drawing.Point(123, 63);
             this.nazwiskoTextBox.Name = "nazwiskoTextBox";
             this.nazwiskoTextBox.Size = new System.Drawing.Size(204, 23);
-            this.nazwiskoTextBox.TabIndex = 8;
+            this.nazwiskoTextBox.TabIndex = 2;
             // 
             // imieTexBox
             // 
-            this.imieTexBox.Location = new System.Drawing.Point(117, 34);
+            this.imieTexBox.Location = new System.Drawing.Point(123, 34);
             this.imieTexBox.Name = "imieTexBox";
             this.imieTexBox.Size = new System.Drawing.Size(204, 23);
-            this.imieTexBox.TabIndex = 7;
+            this.imieTexBox.TabIndex = 1;
             // 
             // StatusLabel
             // 
             this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(6, 209);
+            this.StatusLabel.Location = new System.Drawing.Point(12, 254);
             this.StatusLabel.Name = "StatusLabel";
             this.StatusLabel.Size = new System.Drawing.Size(42, 15);
-            this.StatusLabel.TabIndex = 6;
+            this.StatusLabel.TabIndex = 20;
             this.StatusLabel.Text = "Status:";
             // 
             // rolaLabel
             // 
             this.rolaLabel.AutoSize = true;
-            this.rolaLabel.Location = new System.Drawing.Point(6, 182);
+            this.rolaLabel.Location = new System.Drawing.Point(12, 224);
             this.rolaLabel.Name = "rolaLabel";
             this.rolaLabel.Size = new System.Drawing.Size(33, 15);
-            this.rolaLabel.TabIndex = 5;
+            this.rolaLabel.TabIndex = 19;
             this.rolaLabel.Text = "Rola:";
             // 
             // departamentLabel
             // 
             this.departamentLabel.AutoSize = true;
-            this.departamentLabel.Location = new System.Drawing.Point(6, 153);
+            this.departamentLabel.Location = new System.Drawing.Point(12, 195);
             this.departamentLabel.Name = "departamentLabel";
             this.departamentLabel.Size = new System.Drawing.Size(79, 15);
-            this.departamentLabel.TabIndex = 4;
+            this.departamentLabel.TabIndex = 18;
             this.departamentLabel.Text = "Departament:";
             // 
             // hasloLabel
             // 
             this.hasloLabel.AutoSize = true;
-            this.hasloLabel.Location = new System.Drawing.Point(6, 125);
+            this.hasloLabel.Location = new System.Drawing.Point(12, 128);
             this.hasloLabel.Name = "hasloLabel";
             this.hasloLabel.Size = new System.Drawing.Size(40, 15);
-            this.hasloLabel.TabIndex = 3;
+            this.hasloLabel.TabIndex = 17;
             this.hasloLabel.Text = "Hasło:";
             // 
             // loginLabel
             // 
             this.loginLabel.AutoSize = true;
-            this.loginLabel.Location = new System.Drawing.Point(6, 95);
+            this.loginLabel.Location = new System.Drawing.Point(12, 95);
             this.loginLabel.Name = "loginLabel";
             this.loginLabel.Size = new System.Drawing.Size(40, 15);
-            this.loginLabel.TabIndex = 2;
+            this.loginLabel.TabIndex = 16;
             this.loginLabel.Text = "Login:";
             // 
             // nazwiskoLabel
             // 
             this.nazwiskoLabel.AutoSize = true;
-            this.nazwiskoLabel.Location = new System.Drawing.Point(6, 66);
+            this.nazwiskoLabel.Location = new System.Drawing.Point(12, 66);
             this.nazwiskoLabel.Name = "nazwiskoLabel";
             this.nazwiskoLabel.Size = new System.Drawing.Size(60, 15);
-            this.nazwiskoLabel.TabIndex = 1;
+            this.nazwiskoLabel.TabIndex = 15;
             this.nazwiskoLabel.Text = "Nazwisko:";
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(6, 37);
+            this.nameLabel.Location = new System.Drawing.Point(12, 37);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(33, 15);
-            this.nameLabel.TabIndex = 0;
+            this.nameLabel.TabIndex = 14;
             this.nameLabel.Text = "Imię:";
             // 
-            // saveUserButton
+            // addNewUserButton
             // 
-            this.saveUserButton.Location = new System.Drawing.Point(294, 281);
-            this.saveUserButton.Name = "saveUserButton";
-            this.saveUserButton.Size = new System.Drawing.Size(75, 23);
-            this.saveUserButton.TabIndex = 1;
-            this.saveUserButton.Text = "Zapisz";
-            this.saveUserButton.UseVisualStyleBackColor = true;
-            this.saveUserButton.Click += new System.EventHandler(this.SaveUserButton_Click);
+            this.addNewUserButton.Location = new System.Drawing.Point(289, 319);
+            this.addNewUserButton.Name = "addNewUserButton";
+            this.addNewUserButton.Size = new System.Drawing.Size(82, 23);
+            this.addNewUserButton.TabIndex = 10;
+            this.addNewUserButton.Text = "Dodaj ";
+            this.addNewUserButton.UseVisualStyleBackColor = true;
+            this.addNewUserButton.Click += new System.EventHandler(this.AddNewUserButton_Click);
             // 
-            // confirmLabel
+            // NewUser
             // 
-            this.confirmLabel.AutoSize = true;
-            this.confirmLabel.Location = new System.Drawing.Point(18, 285);
-            this.confirmLabel.Name = "confirmLabel";
-            this.confirmLabel.Size = new System.Drawing.Size(0, 15);
-            this.confirmLabel.TabIndex = 2;
-            // 
-            // EditUser
-            // 
-            this.AcceptButton = this.saveUserButton;
+            this.AcceptButton = this.addNewUserButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 321);
-            this.Controls.Add(this.confirmLabel);
-            this.Controls.Add(this.saveUserButton);
+            this.ClientSize = new System.Drawing.Size(389, 354);
+            this.Controls.Add(this.addNewUserButton);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "EditUser";
+            this.Name = "NewUser";
             this.ShowIcon = false;
-            this.Text = "Edycja użytkownika";
+            this.Text = "Nowy użytkownik";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button addNewUserButton;
+        private System.Windows.Forms.Label confirmPasswordlabel1;
+        private System.Windows.Forms.TextBox confirmPasswordTextBox;
+        private System.Windows.Forms.TextBox newPasswordtextBox;
+        private System.Windows.Forms.CheckBox statusCheckBox;
+        private System.Windows.Forms.ComboBox rolaComboBox;
+        private System.Windows.Forms.ComboBox departamentComboBox;
+        private System.Windows.Forms.TextBox loginTextBox;
+        private System.Windows.Forms.TextBox nazwiskoTextBox;
+        private System.Windows.Forms.TextBox imieTexBox;
+        private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.Label rolaLabel;
         private System.Windows.Forms.Label departamentLabel;
         private System.Windows.Forms.Label hasloLabel;
         private System.Windows.Forms.Label loginLabel;
         private System.Windows.Forms.Label nazwiskoLabel;
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Label StatusLabel;
-        private System.Windows.Forms.Label rolaLabel;
-        private System.Windows.Forms.CheckBox statusCheckBox;
-        private System.Windows.Forms.ComboBox rolaComboBox;
-        private System.Windows.Forms.ComboBox departamentComboBox;
-        private System.Windows.Forms.Button changePasswordButton;
-        private System.Windows.Forms.TextBox loginTextBox;
-        private System.Windows.Forms.TextBox nazwiskoTextBox;
-        private System.Windows.Forms.TextBox imieTexBox;
-        private System.Windows.Forms.Button saveUserButton;
-        private System.Windows.Forms.Label confirmLabel;
     }
 }
