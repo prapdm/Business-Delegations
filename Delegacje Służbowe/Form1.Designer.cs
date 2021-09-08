@@ -105,6 +105,7 @@ namespace Delegacje_Służbowe
             // 
             // Form1
             // 
+            this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(336, 135);
@@ -121,7 +122,7 @@ namespace Delegacje_Służbowe
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Logowanie operatora";
-  
+           
             this.ResumeLayout(false);
             this.PerformLayout();
 
