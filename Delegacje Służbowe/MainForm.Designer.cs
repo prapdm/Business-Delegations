@@ -48,6 +48,8 @@ namespace Delegacje_Służbowe
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.roleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.działyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -129,6 +131,8 @@ namespace Delegacje_Służbowe
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.działyToolStripMenuItem,
+            this.roleToolStripMenuItem,
             this.uprawnieniaStripMenuItem,
             this.passwordChangeStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
@@ -138,13 +142,13 @@ namespace Delegacje_Służbowe
             // uprawnieniaStripMenuItem
             // 
             this.uprawnieniaStripMenuItem.Name = "uprawnieniaStripMenuItem";
-            this.uprawnieniaStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.uprawnieniaStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.uprawnieniaStripMenuItem.Text = "&Uprawnienia";
             // 
             // passwordChangeStripMenuItem
             // 
             this.passwordChangeStripMenuItem.Name = "passwordChangeStripMenuItem";
-            this.passwordChangeStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.passwordChangeStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.passwordChangeStripMenuItem.Text = "&Zmiana hasła";
             this.passwordChangeStripMenuItem.Click += new System.EventHandler(this.passwordChangeStripMenuItem_Click);
             // 
@@ -159,8 +163,9 @@ namespace Delegacje_Służbowe
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "&O programie";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -178,6 +183,18 @@ namespace Delegacje_Służbowe
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(838, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // roleToolStripMenuItem
+            // 
+            this.roleToolStripMenuItem.Name = "roleToolStripMenuItem";
+            this.roleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.roleToolStripMenuItem.Text = "Role";
+            // 
+            // działyToolStripMenuItem
+            // 
+            this.działyToolStripMenuItem.Name = "działyToolStripMenuItem";
+            this.działyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.działyToolStripMenuItem.Text = "Działy";
             // 
             // MainForm
             // 
@@ -221,5 +238,7 @@ namespace Delegacje_Służbowe
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem działyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem roleToolStripMenuItem;
     }
 }

@@ -5,7 +5,7 @@
 
 
 
-Business trip register for your company
+Register business trips for your company
 
 
 ## Features

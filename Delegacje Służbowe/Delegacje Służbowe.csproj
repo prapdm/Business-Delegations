@@ -6,9 +6,15 @@
     <RootNamespace>Delegacje_Służbowe</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>delegacje.ico</ApplicationIcon>
+    <SignAssembly>false</SignAssembly>
+    <Authors>dmochowski@avenus.pl</Authors>
+    <Description>Simpy program for business delegations</Description>
+    <Copyright>MIT Free Software</Copyright>
+    <Company>avenus.pl</Company>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.2" />
     <PackageReference Include="SqlKata" Version="2.3.7" />
     <PackageReference Include="SqlKata.Execution" Version="2.3.7" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
