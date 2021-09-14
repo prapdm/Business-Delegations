@@ -7,11 +7,22 @@ namespace Delegacje_Służbowe
 {
     public partial class NewUser : Form
     {
+        private UsersList ul;
+
         public NewUser()
         {
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
+            FillForm();
+        }
+
+        public NewUser(UsersList userlist)
+        {
+            InitializeComponent();
+            this.MdiParent = MainForm.ActiveForm;
+            this.Show();
+            this.ul = userlist;
             FillForm();
         }
 
@@ -68,12 +79,14 @@ namespace Delegacje_Służbowe
                 department = departament.Id,
                 role = role.Id,
                 Status = status,
-                updated_at = localDate,
+                created_at = localDate,
 
             });
 
             if (row_id > 1)
             {
+                if (this.ul != null)
+                    this.ul.FillDataGrid();
                 this.Close();
             }
 

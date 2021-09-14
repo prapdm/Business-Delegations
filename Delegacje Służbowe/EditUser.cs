@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Diagnostics;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 using System.Drawing;
@@ -9,7 +8,7 @@ namespace Delegacje_Służbowe
 {
     public partial class EditUser : Form
     {
-        private int user_id;
+        private readonly int user_id;
 
         public EditUser()
         {

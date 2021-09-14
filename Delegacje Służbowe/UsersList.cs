@@ -2,11 +2,7 @@
 using System.Windows.Forms;
 using SqlKata.Compilers;
 using SqlKata.Execution;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
+
 
 namespace Delegacje_Służbowe
 {
@@ -49,7 +45,7 @@ namespace Delegacje_Służbowe
             string user_id_s = row.Cells[0].Value.ToString();
             int user_id = int.Parse(user_id_s);
 
-            Debug.WriteLine(user_id);
+            //Debug.WriteLine(user_id);
 
             new EditUser(user_id);
          
@@ -119,7 +115,8 @@ namespace Delegacje_Służbowe
                 this.FillDataGrid();
 
             }
-            else
+
+            else if(e.ClickedItem.ToString() == "Usuń")
             {
                 DialogResult result = MessageBox.Show("Usunięcie użytkownika", "Czy napewno chcesz usunąć tego użytkownika?",
                 MessageBoxButtons.YesNoCancel,
@@ -128,7 +125,7 @@ namespace Delegacje_Służbowe
                 if(result.ToString() == "Yes")
                 {
                     User user = new User();
-                    user.DeleteUser(user_id);
+                    user.DeleteUser(user_id,this);
                 }
 
             }
@@ -140,7 +137,7 @@ namespace Delegacje_Służbowe
 
         private void NewUserbutton_Click(object sender, EventArgs e)
         {
-            new NewUser();
+            new NewUser(this);
         }
 
         private void FilterButton_Click(object sender, EventArgs e)
@@ -152,6 +149,8 @@ namespace Delegacje_Służbowe
 
             if (!String.IsNullOrEmpty(search))
             {
+
+
 
                 var users = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Where(q =>
                                 q.WhereLike("name", $"%{search}%").OrWhereLike("surname", $"%{search}%")
@@ -196,155 +195,16 @@ namespace Delegacje_Służbowe
 
         }
 
-        private void printButton_Click(object sender, EventArgs e)
+        private void PrintButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count > 0)
-            {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "PDF (*.pdf)|*.pdf";
-                sfd.FileName = "użytkownicy.pdf";
-                bool fileError = false;
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    if (File.Exists(sfd.FileName))
-                    {
-                        try
-                        {
-                            File.Delete(sfd.FileName);
-                        }
-                        catch (IOException ex)
-                        {
-                            fileError = true;
-                            MessageBox.Show("It wasn't possible to write the data to the disk." + ex.Message);
-                        }
-                    }
-                    if (!fileError)
-                    {
-                        try
-                        {
-                            PdfPTable pdfTable = new PdfPTable(dataGridView1.Columns.Count);
-                            pdfTable.DefaultCell.Padding = 3;
-                            pdfTable.WidthPercentage = 100;
-                            pdfTable.HorizontalAlignment = 1;
-
-                            foreach (DataGridViewColumn column in dataGridView1.Columns)
-                            {
-                                PdfPCell cell = new PdfPCell(new iTextSharp.text.Phrase(column.HeaderText));
-                                pdfTable.AddCell(cell);
-                            }
-
-                            foreach (DataGridViewRow row in dataGridView1.Rows)
-                            {
-                                foreach (DataGridViewCell cell in row.Cells)
-                                {
-                                    pdfTable.AddCell(cell.Value.ToString());
-                                }
-                            }
-
-                            using (FileStream stream = new FileStream(sfd.FileName, FileMode.Create))
-                            {
-                                Document pdfDoc = new Document(PageSize.A4, 10f, 20f, 20f, 10f);
-                                PdfWriter.GetInstance(pdfDoc, stream);
-                                pdfDoc.Open();
-                                pdfDoc.Add(pdfTable);
-                                pdfDoc.Close();
-                                stream.Close();
-                            }
-
-                            MessageBox.Show("Plik zapisany pomyślnie", "Info");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error :" + ex.Message);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Nie ma żadnych danych w tabeli!", "Info");
-            }
+            ExportClass export = new ExportClass(this.dataGridView1, "users");
+            export.PrintPDF();
         }
 
-        private void exportButton_Click(object sender, EventArgs e)
+        private void ExportButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.Rows.Count > 0)
-            {
-                SaveFileDialog sfd = new SaveFileDialog();
-                sfd.Filter = "CSV (*.csv)|*.csv";
-                sfd.FileName = "użytkownicy.csv";
-                bool fileError = false;
-
-                if (sfd.ShowDialog() == DialogResult.OK)
-                {
-                    if (File.Exists(sfd.FileName))
-                    {
-                        try
-                        {
-                            File.Delete(sfd.FileName);
-                        }
-                        catch (IOException ex)
-                        {
-                            fileError = true;
-                            MessageBox.Show("It wasn't possible to write the data to the disk." + ex.Message);
-                        }
-                    }
-                    if (!fileError)
-                    {
-                        try
-                        {
-                            string csv = "";
-                            int columns = dataGridView1.Columns.Count;
-                            int i = 0;
-
-                            foreach (DataGridViewColumn column in dataGridView1.Columns)
-                            {
-                                if(i == ((columns) - 1))
-                                    csv += column.HeaderText ;
-                                else
-                                    csv += column.HeaderText + ";";
-
-                                i++;
-                            }
-                            csv += "\n";
-
-                            i = 0;
-
-                            foreach (DataGridViewRow row in dataGridView1.Rows)
-                            {
-                                foreach (DataGridViewCell cell in row.Cells)
-                                {
-                                    if (i == ((columns) - 1))
-                                        csv += cell.Value.ToString();
-                                    else
-                                        csv += cell.Value.ToString() + ";";
-
-                                    i++;
-                                    
-                                    
-                                }
-                                csv += "\n";
-                            }
-
-                            using (StreamWriter stream = new StreamWriter(sfd.FileName))
-                            {
-                                stream.Write(csv);
-                                stream.Close();
-                            }
-
-                            MessageBox.Show("Plik zapisany pomyślnie", "Info");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error :" + ex.Message);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Nie ma żadnych danych w tabeli!", "Info");
-            }
+            ExportClass export = new ExportClass(this.dataGridView1, "users");
+            export.ExportCSV();
         }
     }
 }

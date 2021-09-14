@@ -17,7 +17,7 @@ namespace Delegacje_Służbowe
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new NewDelegation();
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -66,6 +66,21 @@ namespace Delegacje_Służbowe
         {
 
             new AboutBox1();
+        }
+
+        private void działyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Dzialy();
+        }
+
+        private void roleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Role();
+        }
+
+        private void openDelegationsStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ShowDelegations();
         }
     }
 }

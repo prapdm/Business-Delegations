@@ -1,7 +1,7 @@
 ﻿
 namespace Delegacje_Służbowe
 {
-    partial class UsersList
+    partial class ShowDelegations
     {
         /// <summary>
         /// Required designer variable.
@@ -29,31 +29,33 @@ namespace Delegacje_Służbowe
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsersList));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowDelegations));
             this.OperationsgroupBox = new System.Windows.Forms.GroupBox();
             this.newUserbutton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.printButton = new System.Windows.Forms.Button();
-            this.SearchTextBox = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.login = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.from_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.to_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.department = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.role = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.target = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.created_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.updated_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.DodateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.OddateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.Dolabel = new System.Windows.Forms.Label();
+            this.Odlabel = new System.Windows.Forms.Label();
             this.FiltrLabel = new System.Windows.Forms.Label();
             this.FilterButton = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.OperationsgroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,10 +65,10 @@ namespace Delegacje_Służbowe
             this.OperationsgroupBox.Controls.Add(this.exportButton);
             this.OperationsgroupBox.Controls.Add(this.printButton);
             this.OperationsgroupBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.OperationsgroupBox.Location = new System.Drawing.Point(856, 0);
+            this.OperationsgroupBox.Location = new System.Drawing.Point(899, 0);
             this.OperationsgroupBox.Name = "OperationsgroupBox";
-            this.OperationsgroupBox.Size = new System.Drawing.Size(231, 584);
-            this.OperationsgroupBox.TabIndex = 4;
+            this.OperationsgroupBox.Size = new System.Drawing.Size(231, 647);
+            this.OperationsgroupBox.TabIndex = 5;
             this.OperationsgroupBox.TabStop = false;
             this.OperationsgroupBox.Text = "Operacje";
             // 
@@ -76,9 +78,8 @@ namespace Delegacje_Służbowe
             this.newUserbutton.Name = "newUserbutton";
             this.newUserbutton.Size = new System.Drawing.Size(201, 39);
             this.newUserbutton.TabIndex = 4;
-            this.newUserbutton.Text = "Nowy pracownik";
+            this.newUserbutton.Text = "Nowa delegacja";
             this.newUserbutton.UseVisualStyleBackColor = true;
-            this.newUserbutton.Click += new System.EventHandler(this.NewUserbutton_Click);
             // 
             // exportButton
             // 
@@ -100,12 +101,20 @@ namespace Delegacje_Służbowe
             this.printButton.UseVisualStyleBackColor = true;
             this.printButton.Click += new System.EventHandler(this.PrintButton_Click);
             // 
-            // SearchTextBox
+            // tableLayoutPanel1
             // 
-            this.SearchTextBox.Location = new System.Drawing.Point(61, 6);
-            this.SearchTextBox.Name = "SearchTextBox";
-            this.SearchTextBox.Size = new System.Drawing.Size(577, 23);
-            this.SearchTextBox.TabIndex = 3;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(899, 647);
+            this.tableLayoutPanel1.TabIndex = 6;
             // 
             // dataGridView1
             // 
@@ -116,10 +125,10 @@ namespace Delegacje_Służbowe
             this.id,
             this.name,
             this.surname,
-            this.login,
+            this.from_date,
+            this.to_date,
             this.department,
-            this.role,
-            this.status,
+            this.target,
             this.created_at,
             this.updated_at});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -128,7 +137,7 @@ namespace Delegacje_Służbowe
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(850, 538);
+            this.dataGridView1.Size = new System.Drawing.Size(893, 601);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellDoubleClick);
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_MouseClick);
@@ -158,13 +167,21 @@ namespace Delegacje_Służbowe
             this.surname.Name = "surname";
             this.surname.ReadOnly = true;
             // 
-            // login
+            // from_date
             // 
-            this.login.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.login.DataPropertyName = "login";
-            this.login.HeaderText = "Login";
-            this.login.Name = "login";
-            this.login.ReadOnly = true;
+            this.from_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.from_date.DataPropertyName = "from_date";
+            this.from_date.HeaderText = "Od";
+            this.from_date.Name = "from_date";
+            this.from_date.ReadOnly = true;
+            // 
+            // to_date
+            // 
+            this.to_date.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.to_date.DataPropertyName = "to_date";
+            this.to_date.HeaderText = "Do";
+            this.to_date.Name = "to_date";
+            this.to_date.ReadOnly = true;
             // 
             // department
             // 
@@ -173,22 +190,15 @@ namespace Delegacje_Służbowe
             this.department.HeaderText = "Departament";
             this.department.Name = "department";
             this.department.ReadOnly = true;
+            this.department.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // role
+            // target
             // 
-            this.role.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.role.HeaderText = "Rola";
-            this.role.Name = "role";
-            this.role.ReadOnly = true;
-            this.role.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // status
-            // 
-            this.status.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.status.DataPropertyName = "Status";
-            this.status.HeaderText = "Status";
-            this.status.Name = "status";
-            this.status.ReadOnly = true;
+            this.target.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.target.DataPropertyName = "target";
+            this.target.HeaderText = "Cel";
+            this.target.Name = "target";
+            this.target.ReadOnly = true;
             // 
             // created_at
             // 
@@ -206,31 +216,57 @@ namespace Delegacje_Służbowe
             this.updated_at.Name = "updated_at";
             this.updated_at.ReadOnly = true;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(856, 584);
-            this.tableLayoutPanel1.TabIndex = 5;
-            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.DodateTimePicker);
+            this.panel1.Controls.Add(this.OddateTimePicker);
+            this.panel1.Controls.Add(this.Dolabel);
+            this.panel1.Controls.Add(this.Odlabel);
             this.panel1.Controls.Add(this.FiltrLabel);
             this.panel1.Controls.Add(this.FilterButton);
             this.panel1.Controls.Add(this.SearchTextBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 547);
+            this.panel1.Location = new System.Drawing.Point(3, 610);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(850, 34);
+            this.panel1.Size = new System.Drawing.Size(893, 34);
             this.panel1.TabIndex = 2;
+            // 
+            // DodateTimePicker
+            // 
+            this.DodateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm";
+            this.DodateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DodateTimePicker.Location = new System.Drawing.Point(507, 6);
+            this.DodateTimePicker.Name = "DodateTimePicker";
+            this.DodateTimePicker.Size = new System.Drawing.Size(126, 23);
+            this.DodateTimePicker.TabIndex = 11;
+            this.DodateTimePicker.Value = new System.DateTime(2021, 10, 14, 0, 0, 0, 0);
+            // 
+            // OddateTimePicker
+            // 
+            this.OddateTimePicker.CustomFormat = "dd-MM-yyyy HH:mm";
+            this.OddateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.OddateTimePicker.Location = new System.Drawing.Point(344, 6);
+            this.OddateTimePicker.Name = "OddateTimePicker";
+            this.OddateTimePicker.Size = new System.Drawing.Size(126, 23);
+            this.OddateTimePicker.TabIndex = 10;
+            // 
+            // Dolabel
+            // 
+            this.Dolabel.AutoSize = true;
+            this.Dolabel.Location = new System.Drawing.Point(476, 9);
+            this.Dolabel.Name = "Dolabel";
+            this.Dolabel.Size = new System.Drawing.Size(25, 15);
+            this.Dolabel.TabIndex = 9;
+            this.Dolabel.Text = "Do:";
+            // 
+            // Odlabel
+            // 
+            this.Odlabel.AutoSize = true;
+            this.Odlabel.Location = new System.Drawing.Point(312, 9);
+            this.Odlabel.Name = "Odlabel";
+            this.Odlabel.Size = new System.Drawing.Size(26, 15);
+            this.Odlabel.TabIndex = 8;
+            this.Odlabel.Text = "Od:";
             // 
             // FiltrLabel
             // 
@@ -247,32 +283,33 @@ namespace Delegacje_Służbowe
             this.FilterButton.FlatAppearance.BorderSize = 0;
             this.FilterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.FilterButton.Image = ((System.Drawing.Image)(resources.GetObject("FilterButton.Image")));
-            this.FilterButton.Location = new System.Drawing.Point(644, 1);
+            this.FilterButton.Location = new System.Drawing.Point(661, 1);
             this.FilterButton.Name = "FilterButton";
             this.FilterButton.Size = new System.Drawing.Size(31, 30);
             this.FilterButton.TabIndex = 5;
             this.FilterButton.UseVisualStyleBackColor = true;
             this.FilterButton.Click += new System.EventHandler(this.FilterButton_Click);
             // 
-            // imageList1
+            // SearchTextBox
             // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.SearchTextBox.Location = new System.Drawing.Point(61, 6);
+            this.SearchTextBox.Name = "SearchTextBox";
+            this.SearchTextBox.Size = new System.Drawing.Size(222, 23);
+            this.SearchTextBox.TabIndex = 3;
             // 
-            // UsersList
+            // ShowDelegations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1087, 584);
+            this.ClientSize = new System.Drawing.Size(1130, 647);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.OperationsgroupBox);
-            this.Name = "UsersList";
+            this.Name = "ShowDelegations";
             this.ShowIcon = false;
-            this.Text = "Lista pracowników";
+            this.Text = "Rejestr delegacji";
             this.OperationsgroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -281,26 +318,28 @@ namespace Delegacje_Służbowe
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox OperationsgroupBox;
-        private System.Windows.Forms.TextBox SearchTextBox;
+        private System.Windows.Forms.Button newUserbutton;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.Button printButton;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button newUserbutton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button FilterButton;
-        private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label FiltrLabel;
+        private System.Windows.Forms.Button FilterButton;
+        private System.Windows.Forms.TextBox SearchTextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn surname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn login;
+        private System.Windows.Forms.DataGridViewTextBoxColumn from_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn to_date;
         private System.Windows.Forms.DataGridViewTextBoxColumn department;
-        private System.Windows.Forms.DataGridViewTextBoxColumn role;
-        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn target;
         private System.Windows.Forms.DataGridViewTextBoxColumn created_at;
         private System.Windows.Forms.DataGridViewTextBoxColumn updated_at;
+        private System.Windows.Forms.Label Dolabel;
+        private System.Windows.Forms.Label Odlabel;
+        private System.Windows.Forms.DateTimePicker DodateTimePicker;
+        private System.Windows.Forms.DateTimePicker OddateTimePicker;
     }
 }
