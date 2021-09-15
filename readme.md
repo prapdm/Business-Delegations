@@ -14,6 +14,11 @@
 - checking delegation date conflict
 - exemple mdf database
 
+## Admin Acces
+
+Login: admin
+Password: admin
+
 
 ## Screenshots
 
