@@ -10,22 +10,25 @@ namespace Delegacje_Służbowe
     public partial class EditDelegation : Form
     {
         private readonly int  delegation_id;
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
 
         public EditDelegation(int delegation_id)
         {
             this.delegation_id = delegation_id;
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
             this.Fill();
-            
+            Permissions permissions = new Permissions(LoginForm.loged_user);
+            permissions.CheckEditDelegationPermisions(this);
+
         }
 
         private void Fill()
         {
-
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             var delegation = db.Query("Delegations").Where("Id", this.delegation_id).FirstOrDefault();
 
             this.NewDelegationgroupBox.Text = $"Edycja delegacji numer {delegation_id}";
@@ -43,8 +46,6 @@ namespace Delegacje_Służbowe
         private void ZapiszDelegajcjebutton_Click(object sender, EventArgs e)
         {
             DateTime localDate = DateTime.Now;
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             var affected = db.Query("Delegations").Where("Id", this.delegation_id).Update(new
             {
                 target = this.CeltextBox.Text,

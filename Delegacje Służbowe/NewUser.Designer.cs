@@ -244,7 +244,7 @@ namespace Delegacje_Służbowe
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button addNewUserButton;
+        public System.Windows.Forms.Button addNewUserButton;
         private System.Windows.Forms.Label confirmPasswordlabel1;
         private System.Windows.Forms.TextBox confirmPasswordTextBox;
         private System.Windows.Forms.TextBox newPasswordtextBox;

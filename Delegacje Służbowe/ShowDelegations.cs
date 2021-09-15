@@ -8,22 +8,26 @@ namespace Delegacje_Służbowe
 {
     public partial class ShowDelegations : Form
     {
- 
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
 
         public ShowDelegations()
         {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
             FillDataGrid();
+            Permissions permissions = new Permissions(LoginForm.loged_user);
+            permissions.CheckDelegationPermisions(this);
+            
         }
 
         public void FillDataGrid()
         {
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.AutoGenerateColumns = false;
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             var delegations = db.Query("Delegations AS dl").Join("Users AS u", "u.Id", "dl.user_id").Join("Departments AS dp", "dl.Id", "dp.Id").Get();
 
 
@@ -62,30 +66,45 @@ namespace Delegacje_Służbowe
 
             else if (e.ClickedItem.ToString() == "Usuń")
             {
-                DialogResult result = MessageBox.Show("Usunięcie użytkownika", "Czy napewno chcesz usunąć tego użytkownika?",
-                MessageBoxButtons.YesNoCancel,
-                MessageBoxIcon.Warning);
 
-                if (result.ToString() == "Yes")
+                var userq = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", LoginForm.loged_user).Where("status", 1).FirstOrDefault();
+
+                if (userq != null)
                 {
-                    var compiler = new SqlServerCompiler();
-                    var db = new QueryFactory(Program.conn.con, compiler);
-                    int affected = db.Query("Delegations").Where("Id", delegation_id).Delete();
-
-                    if (affected == 1)
+                    if (userq.delete_delegation == 0)
                     {
-                        MessageBox.Show("Delegacja o identyfikatorze " + delegation_id + " została usunięta.", "Potwierdzenie usunięcia",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                        this.FillDataGrid();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Delegacja o identyfikatorze " + delegation_id + " nie została usunięta.", "Błąd",
+                        MessageBox.Show("Brak uprawnień do wykonania tej czynności", "Nie można wykonać tej czynności",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                     }
+                    else
+                    {
+
+                        DialogResult result = MessageBox.Show("Usunięcie użytkownika", "Czy napewno chcesz usunąć tę delegację?",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Warning);
+
+                        if (result.ToString() == "Yes")
+                        {
+                             db.Query("Delegations").Where("Id", delegation_id).Delete();
+                             MessageBox.Show("Delegacja o identyfikatorze " + delegation_id + " została usunięta.", "Potwierdzenie usunięcia",
+                             MessageBoxButtons.OK,
+                             MessageBoxIcon.Information);
+                            this.FillDataGrid();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Delegacja o identyfikatorze " + delegation_id + " nie została usunięta.", "Błąd",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        }
+
+
+                    }
+
                 }
+
+ 
 
             }
 
@@ -140,13 +159,6 @@ namespace Delegacje_Służbowe
         private void FilterButton_Click(object sender, EventArgs e)
         {
             string search = this.SearchTextBox.Text;
-            
-       
-
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
-
-         
 
             if (!String.IsNullOrEmpty(search) )
             {
@@ -209,6 +221,11 @@ namespace Delegacje_Służbowe
 
             new EditDelegation(delegation_id);
 
+        }
+
+        private void NewDelegationbutton_Click(object sender, EventArgs e)
+        {
+            new NewDelegation();
         }
     }
 }

@@ -7,8 +7,14 @@ namespace Delegacje_Służbowe
 {
     public partial class NewDelegation : Form
     {
+
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
+
         public NewDelegation()
         {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
@@ -17,11 +23,7 @@ namespace Delegacje_Służbowe
 
         private void Fill()
         {
-
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             var users = db.Query("Users").Where("Status",1).Get();
-
 
             foreach (var user in users)
             { 
@@ -32,8 +34,7 @@ namespace Delegacje_Służbowe
         private void FilterButton_Click(object sender, EventArgs e)
         {
             string search = this.SearchTextBox.Text;
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
+           
 
             
 
@@ -75,9 +76,7 @@ namespace Delegacje_Służbowe
             else
             {
 
-                var compiler = new SqlServerCompiler();
-                var db = new QueryFactory(Program.conn.con, compiler);
-
+            
 
                 DateTime from_date = DateTime.Parse(OddateTimePicker.Value.ToString());
                 DateTime to_date = DateTime.Parse(OddateTimePicker.Value.ToString());

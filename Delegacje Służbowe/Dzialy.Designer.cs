@@ -72,7 +72,7 @@ namespace Delegacje_Służbowe
             this.addDodaj.TabIndex = 6;
             this.addDodaj.Text = "Dodaj";
             this.addDodaj.UseVisualStyleBackColor = true;
-            this.addDodaj.Click += new System.EventHandler(this.addDodaj_Click);
+            this.addDodaj.Click += new System.EventHandler(this.AddDodaj_Click);
             // 
             // AddtextBox
             // 
@@ -104,8 +104,8 @@ namespace Delegacje_Służbowe
 
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label Dzialylabel1;
-        private System.Windows.Forms.Button Usunbutton1;
-        private System.Windows.Forms.Button addDodaj;
+        public System.Windows.Forms.Button Usunbutton1;
+        public System.Windows.Forms.Button addDodaj;
         private System.Windows.Forms.TextBox AddtextBox;
     }
 }

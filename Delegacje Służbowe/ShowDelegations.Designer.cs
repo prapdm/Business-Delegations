@@ -31,7 +31,7 @@ namespace Delegacje_Służbowe
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShowDelegations));
             this.OperationsgroupBox = new System.Windows.Forms.GroupBox();
-            this.newUserbutton = new System.Windows.Forms.Button();
+            this.newDelegationbutton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.printButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -61,7 +61,7 @@ namespace Delegacje_Służbowe
             // 
             // OperationsgroupBox
             // 
-            this.OperationsgroupBox.Controls.Add(this.newUserbutton);
+            this.OperationsgroupBox.Controls.Add(this.newDelegationbutton);
             this.OperationsgroupBox.Controls.Add(this.exportButton);
             this.OperationsgroupBox.Controls.Add(this.printButton);
             this.OperationsgroupBox.Dock = System.Windows.Forms.DockStyle.Right;
@@ -72,14 +72,15 @@ namespace Delegacje_Służbowe
             this.OperationsgroupBox.TabStop = false;
             this.OperationsgroupBox.Text = "Operacje";
             // 
-            // newUserbutton
+            // newDelegationbutton
             // 
-            this.newUserbutton.Location = new System.Drawing.Point(18, 37);
-            this.newUserbutton.Name = "newUserbutton";
-            this.newUserbutton.Size = new System.Drawing.Size(201, 39);
-            this.newUserbutton.TabIndex = 4;
-            this.newUserbutton.Text = "Nowa delegacja";
-            this.newUserbutton.UseVisualStyleBackColor = true;
+            this.newDelegationbutton.Location = new System.Drawing.Point(18, 37);
+            this.newDelegationbutton.Name = "newDelegationbutton";
+            this.newDelegationbutton.Size = new System.Drawing.Size(201, 39);
+            this.newDelegationbutton.TabIndex = 4;
+            this.newDelegationbutton.Text = "Nowa delegacja";
+            this.newDelegationbutton.UseVisualStyleBackColor = true;
+            this.newDelegationbutton.Click += new System.EventHandler(this.NewDelegationbutton_Click);
             // 
             // exportButton
             // 
@@ -319,7 +320,7 @@ namespace Delegacje_Służbowe
         #endregion
 
         private System.Windows.Forms.GroupBox OperationsgroupBox;
-        private System.Windows.Forms.Button newUserbutton;
+        public System.Windows.Forms.Button newDelegationbutton;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.Button printButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

@@ -9,7 +9,7 @@ namespace Delegacje_Służbowe
 {
     public partial class ChangePassword : Form
     {
-        private int user_id;
+        private readonly int user_id;
 
         public ChangePassword(int user_id)
         {

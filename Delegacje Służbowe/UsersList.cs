@@ -8,10 +8,17 @@ namespace Delegacje_Służbowe
 {
     public partial class UsersList : Form
     {
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
+
         public UsersList()
         {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             FillDataGrid();
+            Permissions permissions = new Permissions(LoginForm.loged_user);
+            permissions.CheckUserListPermisions(this);
         }
  
 
@@ -19,8 +26,6 @@ namespace Delegacje_Służbowe
         {
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.AutoGenerateColumns = false;
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             var users = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Get();
 
             String Status;
@@ -118,15 +123,35 @@ namespace Delegacje_Służbowe
 
             else if(e.ClickedItem.ToString() == "Usuń")
             {
-                DialogResult result = MessageBox.Show("Usunięcie użytkownika", "Czy napewno chcesz usunąć tego użytkownika?",
-                MessageBoxButtons.YesNoCancel,
-                MessageBoxIcon.Warning);
 
-                if(result.ToString() == "Yes")
+                var userq = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", LoginForm.loged_user).Where("status", 1).FirstOrDefault();
+
+                if (userq != null)
                 {
-                    User user = new User();
-                    user.DeleteUser(user_id,this);
+                    if (userq.delete_user == 0)
+                    {
+                       MessageBox.Show("Brak uprawnień do wykonania tej czynności", "Nie można wykonać tej czynności",
+                       MessageBoxButtons.OK,
+                       MessageBoxIcon.Warning);
+                    } else
+                    {
+
+                        DialogResult result = MessageBox.Show("Usunięcie użytkownika", "Czy napewno chcesz usunąć tego użytkownika?",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Warning);
+
+                        if (result.ToString() == "Yes")
+                        {
+                            User user = new User();
+                            user.DeleteUser(user_id, this);
+                        }
+
+
+                    }
+
                 }
+
+                
 
             }
 
@@ -143,8 +168,6 @@ namespace Delegacje_Służbowe
         private void FilterButton_Click(object sender, EventArgs e)
         {
             string search = this.SearchTextBox.Text;
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             String Status;
 
             if (!String.IsNullOrEmpty(search))

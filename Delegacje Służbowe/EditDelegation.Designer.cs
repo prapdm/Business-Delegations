@@ -167,7 +167,7 @@ namespace Delegacje_Służbowe
         #endregion
 
         private System.Windows.Forms.GroupBox NewDelegationgroupBox;
-        private System.Windows.Forms.Button ZapiszDelegajcjebutton;
+        public System.Windows.Forms.Button ZapiszDelegajcjebutton;
         private System.Windows.Forms.DateTimePicker DodateTimePicker;
         private System.Windows.Forms.DateTimePicker OddateTimePicker;
         private System.Windows.Forms.TextBox MiejscowosctextBox;

@@ -8,10 +8,14 @@ namespace Delegacje_Służbowe
     public partial class RoleAdd : Form
     {
 
-        private Role roles;
+        private readonly Role roles;
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
 
         public RoleAdd(Role roles)
         {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
@@ -22,6 +26,8 @@ namespace Delegacje_Służbowe
             RolecheckedListBox.Items.Add("Usuwanie użytkowników");
             RolecheckedListBox.Items.Add("Dodawanie departamentów");
             RolecheckedListBox.Items.Add("Usuwanie depeartamentów");
+            RolecheckedListBox.Items.Add("Wyświetlanie depeartamentów");
+            RolecheckedListBox.Items.Add("Wyświetlanie roli");
             RolecheckedListBox.Items.Add("Dodawanie roli");
             RolecheckedListBox.Items.Add("Modyfikowanie roli");
             RolecheckedListBox.Items.Add("Usuwanie roli");
@@ -40,8 +46,6 @@ namespace Delegacje_Służbowe
                 MessageBox.Show("Wpisz nazwę roli", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             else
             {
-                var compiler = new SqlServerCompiler();
-                var db = new QueryFactory(Program.conn.con, compiler);
                 var row_id = db.Query("Roles").InsertGetId<int>(new
                 {
                     role_name = this.RoleNameTextBox.Text,
@@ -51,12 +55,14 @@ namespace Delegacje_Służbowe
                     delete_user = (bool)RolecheckedListBox.GetItemChecked(3),
                     add_departments = (bool)RolecheckedListBox.GetItemChecked(4),
                     del_departments = (bool)RolecheckedListBox.GetItemChecked(5),
-                    add_roles = (bool)RolecheckedListBox.GetItemChecked(6),
-                    modify_role = (bool)RolecheckedListBox.GetItemChecked(7),
-                    del_roles = (bool)RolecheckedListBox.GetItemChecked(8),
-                    add_delegation = (bool)RolecheckedListBox.GetItemChecked(9),
-                    modify_delegation = (bool)RolecheckedListBox.GetItemChecked(10),
-                    delete_delegation = (bool)RolecheckedListBox.GetItemChecked(11),
+                    view_departments = (bool)RolecheckedListBox.GetItemChecked(6),
+                    add_roles = (bool)RolecheckedListBox.GetItemChecked(7),
+                    modify_role = (bool)RolecheckedListBox.GetItemChecked(8),
+                    view_roles = (bool)RolecheckedListBox.GetItemChecked(9),
+                    del_roles = (bool)RolecheckedListBox.GetItemChecked(10),
+                    add_delegation = (bool)RolecheckedListBox.GetItemChecked(11),
+                    modify_delegation = (bool)RolecheckedListBox.GetItemChecked(12),
+                    delete_delegation = (bool)RolecheckedListBox.GetItemChecked(13),
                     created_at = localDate,
 
                 });

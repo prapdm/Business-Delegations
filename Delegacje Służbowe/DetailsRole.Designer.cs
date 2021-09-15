@@ -83,7 +83,7 @@ namespace Delegacje_Służbowe
         #endregion
 
         private System.Windows.Forms.CheckedListBox RolecheckedListBox;
-        private System.Windows.Forms.Button Zapiszbutton;
+        public System.Windows.Forms.Button Zapiszbutton;
         private System.Windows.Forms.Label label1;
     }
 }

@@ -287,7 +287,7 @@ namespace Delegacje_Służbowe
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.Button printButton;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button newUserbutton;
+        public System.Windows.Forms.Button newUserbutton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button FilterButton;

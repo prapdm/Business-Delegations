@@ -247,7 +247,7 @@ namespace Delegacje_Służbowe
         private System.Windows.Forms.TextBox loginTextBox;
         private System.Windows.Forms.TextBox nazwiskoTextBox;
         private System.Windows.Forms.TextBox imieTexBox;
-        private System.Windows.Forms.Button saveUserButton;
+        public System.Windows.Forms.Button saveUserButton;
         private System.Windows.Forms.Label confirmLabel;
     }
 }

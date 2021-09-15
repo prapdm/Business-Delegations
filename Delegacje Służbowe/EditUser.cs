@@ -9,28 +9,26 @@ namespace Delegacje_Służbowe
     public partial class EditUser : Form
     {
         private readonly int user_id;
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
 
-        public EditUser()
-        {
-            InitializeComponent();
-        }
+ 
 
         public EditUser(int user_id)
         {
             this.user_id = user_id;
-
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
-           
-             
             FillForm();
+            Permissions permissions = new Permissions(LoginForm.loged_user);
+            permissions.CheckEditUserPermisions(this);
         }
 
         public void FillForm()
         {
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Where("Users.id", user_id).FirstOrDefault();
             var departaments = db.Query("Departments").Get();
             var roles = db.Query("Roles").Get();
@@ -61,12 +59,8 @@ namespace Delegacje_Służbowe
         private void SaveUserButton_Click(object sender, EventArgs e)
         {
 
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             int status;
             DateTime localDate = DateTime.Now;
-
-            //Debug.WriteLine(this.imieTexBox.Text);
 
             if (this.statusCheckBox.Checked)
                 status = 0;

@@ -7,17 +7,23 @@ namespace Delegacje_Służbowe
 {
     public partial class Role : Form
     {
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
+
         public Role()
         {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
             this.Fill();
+            Permissions permissions = new Permissions(LoginForm.loged_user);
+            permissions.CheckRolesPermisions(this);
         }
 
         public void Fill()
         {
-            var db = new QueryFactory(Program.conn.con, new SqlServerCompiler());
             var roles = db.Query("Roles").Get();
 
             RolelistBox.Items.Clear();
@@ -30,7 +36,7 @@ namespace Delegacje_Służbowe
 
         }
 
-        private void addDodaj_Click(object sender, EventArgs e)
+        private void AddDodaj_Click(object sender, EventArgs e)
         {
             new RoleAdd(this);
         }
@@ -61,8 +67,6 @@ namespace Delegacje_Służbowe
             if (RolelistBox.SelectedItem != null)
             {
                 string curItem = RolelistBox.SelectedItem.ToString();
-                var compiler = new SqlServerCompiler();
-                var db = new QueryFactory(Program.conn.con, compiler);
                 int affected = db.Query("Roles").Where("role_name", curItem).Delete();
 
                 if (affected == 1)

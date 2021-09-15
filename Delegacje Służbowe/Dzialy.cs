@@ -10,17 +10,24 @@ namespace Delegacje_Służbowe
 
     public partial class Dzialy : Form
     {
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
+
         public Dzialy()
         {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
             this.Fill();
+            Permissions permissions = new Permissions(LoginForm.loged_user);
+            permissions.CheckDzialyPermisions(this);
         }
 
         public void Fill()
         {
-            var db = new QueryFactory(Program.conn.con, new SqlServerCompiler());
+
             var departments = db.Query("Departments").Get();
  
             foreach (var department in departments)
@@ -34,21 +41,19 @@ namespace Delegacje_Służbowe
         private void Usunbutton1_Click(object sender, EventArgs e)
         {
             string curItem = listBox1.SelectedItem.ToString();
-            var db = new QueryFactory(Program.conn.con, new SqlServerCompiler());
-            var roles = db.Query("Departments").Where("full_name", curItem).Delete();
-
+            db.Query("Departments").Where("full_name", curItem).Delete();
             listBox1.Items.Remove(curItem);
 
         }
 
-        private void addDodaj_Click(object sender, EventArgs e)
+        private void AddDodaj_Click(object sender, EventArgs e)
         {
 
             if (!String.IsNullOrEmpty(this.AddtextBox.Text))
             {
                 DateTime localDate = DateTime.Now;
                 Debug.WriteLine(this.AddtextBox.Text);
-                var db = new QueryFactory(Program.conn.con, new SqlServerCompiler());
+          
                 var row_id = db.Query("Departments").InsertGetId<int>(new
                 {
                     full_name = this.AddtextBox.Text,
