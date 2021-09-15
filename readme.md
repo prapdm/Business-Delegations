@@ -26,17 +26,17 @@
 ### Roles
 ![Alt text](Screenshots/roles.jpg?raw=true "Roles")
 
-### Roles
+### Departments
 ![Alt text](Screenshots/departaments.jpg?raw=true "Departments")
 
 ### Delegations
-![Alt text](Screenshots/delegations.jpg?raw=true "Departments")
+![Alt text](Screenshots/delegations.jpg?raw=true "Delegations")
 
 ### New delegation
-![Alt text](Screenshots/new_delegation.jpg?raw=true "Departments")
+![Alt text](Screenshots/new_delegation.jpg?raw=true "New delegation")
 
 ### Change password
-![Alt text](Screenshots/password.jpg?raw=true "Departments")
+![Alt text](Screenshots/password.jpg?raw=true "Change password")
 
 ## License
  
