@@ -148,7 +148,7 @@ namespace Delegacje_Służbowe
                    
 
                     //pass user_id to contexMenu_ItemClicked event using lambda expression
-                    m.ItemClicked += (sender, e) => { ContexMenu_ItemClicked(sender, e, delegation_id); };
+                    m.ItemClicked += (sender1, e1) => { ContexMenu_ItemClicked(sender1, e1, delegation_id); };
 
 
                 }

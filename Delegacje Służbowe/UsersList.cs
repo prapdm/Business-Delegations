@@ -95,7 +95,7 @@ namespace Delegacje_Służbowe
                     int user_id = int.Parse(user_id_s);
 
                     //pass user_id to contexMenu_ItemClicked event using lambda expression
-                    m.ItemClicked += (sender, e) => { ContexMenu_ItemClicked(sender, e, user_id); };
+                    m.ItemClicked += (sender1, e1) => { ContexMenu_ItemClicked(sender1, e1, user_id); };
                    
 
                 }
