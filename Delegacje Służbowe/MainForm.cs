@@ -5,9 +5,14 @@ namespace Delegacje_Służbowe
 {
     public partial class MainForm : Form
     {
+        
+
         public MainForm()
         {
             InitializeComponent();
+            Permissions permissions = new Permissions(LoginForm.loged_user );
+            permissions.CheckMainMenu(this);
+            
         }
 
         ~MainForm()
@@ -17,7 +22,7 @@ namespace Delegacje_Służbowe
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            new NewDelegation();
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -36,7 +41,7 @@ namespace Delegacje_Służbowe
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
+            Timer timer1 = new Timer();
             timer1.Interval = 1000;//1 seconds
             timer1.Tick += new EventHandler(Timer1_Tick);
             timer1.Enabled = true;
@@ -52,14 +57,35 @@ namespace Delegacje_Służbowe
             toolStripStatusLabel1.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
         }
 
-        private void passwordChangeStripMenuItem_Click(object sender, EventArgs e)
+        private void PasswordChangeStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ChangePassword(Form1.loged_user);
+            new ChangePassword(LoginForm.loged_user);
         }
 
-        private void nowyPracownikToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NowyPracownikToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new NewUser();
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            new AboutBox1();
+        }
+
+        private void DziałyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Dzialy();
+        }
+
+        private void RoleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new Role();
+        }
+
+        private void OpenDelegationsStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ShowDelegations();
         }
     }
 }

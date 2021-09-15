@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Diagnostics;
-
-
-
 
 
 
@@ -16,7 +9,7 @@ namespace Delegacje_Służbowe
     {
 
         public SqlConnection con;
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @$"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
 
         public ConnectionClass()
         {

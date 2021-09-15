@@ -17,10 +17,10 @@ namespace Delegacje_Służbowe
         [STAThread]
         static void Main()
         {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
+           // Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 form1 = new Form1();
+            LoginForm form1 = new LoginForm();
             
 
             conn = new ConnectionClass();

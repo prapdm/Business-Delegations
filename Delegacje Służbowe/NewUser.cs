@@ -7,20 +7,34 @@ namespace Delegacje_Służbowe
 {
     public partial class NewUser : Form
     {
+        private readonly UsersList ul;
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
+
         public NewUser()
         {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             this.MdiParent = MainForm.ActiveForm;
             this.Show();
             FillForm();
         }
 
+        public NewUser(UsersList userlist)
+        {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
+            InitializeComponent();
+            this.MdiParent = MainForm.ActiveForm;
+            this.Show();
+            this.ul = userlist;
+            FillForm();
+        }
+
 
         public void FillForm()
         {
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
- ;
 
             var departaments = db.Query("Departments").Get();
             var roles = db.Query("Roles").Get();
@@ -40,10 +54,6 @@ namespace Delegacje_Służbowe
 
         private void AddNewUser()
         {
-
-
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             int status;
             DateTime localDate = DateTime.Now;
 
@@ -68,12 +78,14 @@ namespace Delegacje_Służbowe
                 department = departament.Id,
                 role = role.Id,
                 Status = status,
-                updated_at = localDate,
+                created_at = localDate,
 
             });
 
             if (row_id > 1)
             {
+                if (this.ul != null)
+                    this.ul.FillDataGrid();
                 this.Close();
             }
 

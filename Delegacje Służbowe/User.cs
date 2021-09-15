@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Security.Cryptography;
-using System.Diagnostics;
-
+using SqlKata.Compilers;
+using SqlKata.Execution;
+using System.Windows.Forms;
 
 namespace Delegacje_Służbowe
 {
@@ -51,9 +52,29 @@ namespace Delegacje_Służbowe
             return true;
         }
 
-        public void DeleteUser(int user_id)
+        public void DeleteUser(int user_id, UsersList ul)
         {
-            Debug.WriteLine(user_id);
+
+            var compiler = new SqlServerCompiler();
+            var db = new QueryFactory(Program.conn.con, compiler);
+            int affected  = db.Query("Users").Where("Id", user_id).Delete();
+
+            if (affected == 1)
+            {
+                MessageBox.Show("Użytkownik o identyfikatorze " + user_id + " został usunięty.", "Potwierdzenie usunięcia",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+                ul.FillDataGrid();
+            }
+            else
+            {
+                MessageBox.Show("Użytkownik o identyfikatorze " + user_id + " nie został usunięty.", "Błąd",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+
+
+
         }
 
 

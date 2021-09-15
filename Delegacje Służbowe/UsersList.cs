@@ -2,17 +2,23 @@
 using System.Windows.Forms;
 using SqlKata.Compilers;
 using SqlKata.Execution;
-using System.Diagnostics;
-using System.Drawing;
+
 
 namespace Delegacje_Służbowe
 {
     public partial class UsersList : Form
     {
+        private readonly SqlServerCompiler compiler;
+        private readonly QueryFactory db;
+
         public UsersList()
         {
+            this.compiler = new SqlServerCompiler();
+            this.db = new QueryFactory(Program.conn.con, this.compiler);
             InitializeComponent();
             FillDataGrid();
+            Permissions permissions = new Permissions(LoginForm.loged_user);
+            permissions.CheckUserListPermisions(this);
         }
  
 
@@ -20,8 +26,6 @@ namespace Delegacje_Służbowe
         {
             this.dataGridView1.Rows.Clear();
             this.dataGridView1.AutoGenerateColumns = false;
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
             var users = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Get();
 
             String Status;
@@ -46,7 +50,7 @@ namespace Delegacje_Służbowe
             string user_id_s = row.Cells[0].Value.ToString();
             int user_id = int.Parse(user_id_s);
 
-            Debug.WriteLine(user_id);
+            //Debug.WriteLine(user_id);
 
             new EditUser(user_id);
          
@@ -91,7 +95,7 @@ namespace Delegacje_Służbowe
                     int user_id = int.Parse(user_id_s);
 
                     //pass user_id to contexMenu_ItemClicked event using lambda expression
-                    m.ItemClicked += (sender, e) => { ContexMenu_ItemClicked(sender, e, user_id); };
+                    m.ItemClicked += (sender1, e1) => { ContexMenu_ItemClicked(sender1, e1, user_id); };
                    
 
                 }
@@ -116,17 +120,38 @@ namespace Delegacje_Służbowe
                 this.FillDataGrid();
 
             }
-            else
-            {
-                DialogResult result = MessageBox.Show("Usunięcie użytkownika", "Czy napewno chcesz usunąć tego użytkownika?",
-                MessageBoxButtons.YesNoCancel,
-                MessageBoxIcon.Warning);
 
-                if(result.ToString() == "Yes")
+            else if(e.ClickedItem.ToString() == "Usuń")
+            {
+
+                var userq = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", LoginForm.loged_user).Where("status", 1).FirstOrDefault();
+
+                if (userq != null)
                 {
-                    User user = new User();
-                    user.DeleteUser(user_id);
+                    if (userq.delete_user == 0)
+                    {
+                       MessageBox.Show("Brak uprawnień do wykonania tej czynności", "Nie można wykonać tej czynności",
+                       MessageBoxButtons.OK,
+                       MessageBoxIcon.Warning);
+                    } else
+                    {
+
+                        DialogResult result = MessageBox.Show("Usunięcie użytkownika", "Czy napewno chcesz usunąć tego użytkownika?",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Warning);
+
+                        if (result.ToString() == "Yes")
+                        {
+                            User user = new User();
+                            user.DeleteUser(user_id, this);
+                        }
+
+
+                    }
+
                 }
+
+                
 
             }
 
@@ -137,7 +162,72 @@ namespace Delegacje_Służbowe
 
         private void NewUserbutton_Click(object sender, EventArgs e)
         {
-            new NewUser();
+            new NewUser(this);
+        }
+
+        private void FilterButton_Click(object sender, EventArgs e)
+        {
+            string search = this.SearchTextBox.Text;
+            String Status;
+
+            if (!String.IsNullOrEmpty(search))
+            {
+
+
+
+                var users = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Where(q =>
+                                q.WhereLike("name", $"%{search}%").OrWhereLike("surname", $"%{search}%")
+                            ).OrWhere(q =>
+                                q.WhereLike("login", $"%{search}%").OrWhereLike("Departments.full_name", $"%{search}%")
+                            ).OrWhere(q =>
+                                q.WhereLike("Roles.role_name", $"%{search}%")
+                            ).Get();
+
+
+                
+
+                this.dataGridView1.Rows.Clear();
+                foreach (var user in users)
+                {
+                    if (user.Status == 1)
+                        Status = "Aktywny";
+                    else
+                        Status = "Nieaktywny";
+
+
+                    this.dataGridView1.Rows.Add(user.Id, user.name, user.surname, user.login, user.full_name, user.role_name, Status, user.created_at, user.updated_at);
+
+                }       
+            }
+            else
+            {
+                var users = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Get();
+                this.dataGridView1.Rows.Clear();
+                foreach (var user in users)
+                {
+                    if (user.Status == 1)
+                        Status = "Aktywny";
+                    else
+                        Status = "Nieaktywny";
+
+
+                    this.dataGridView1.Rows.Add(user.Id, user.name, user.surname, user.login, user.full_name, user.role_name, Status, user.created_at, user.updated_at);
+
+                }
+            }    
+
+        }
+
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+            ExportClass export = new ExportClass(this.dataGridView1, "users");
+            export.PrintPDF();
+        }
+
+        private void ExportButton_Click(object sender, EventArgs e)
+        {
+            ExportClass export = new ExportClass(this.dataGridView1, "users");
+            export.ExportCSV();
         }
     }
 }

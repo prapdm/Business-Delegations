@@ -29,12 +29,13 @@ namespace Delegacje_Służbowe
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UsersList));
             this.OperationsgroupBox = new System.Windows.Forms.GroupBox();
             this.newUserbutton = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.exportButton = new System.Windows.Forms.Button();
             this.printButton = new System.Windows.Forms.Button();
+            this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,28 +46,33 @@ namespace Delegacje_Służbowe
             this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.created_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.updated_at = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.FiltrLabel = new System.Windows.Forms.Label();
+            this.FilterButton = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.OperationsgroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // OperationsgroupBox
             // 
             this.OperationsgroupBox.Controls.Add(this.newUserbutton);
-            this.OperationsgroupBox.Controls.Add(this.textBox2);
-            this.OperationsgroupBox.Controls.Add(this.label1);
             this.OperationsgroupBox.Controls.Add(this.exportButton);
             this.OperationsgroupBox.Controls.Add(this.printButton);
             this.OperationsgroupBox.Dock = System.Windows.Forms.DockStyle.Right;
-            this.OperationsgroupBox.Location = new System.Drawing.Point(684, 0);
+            this.OperationsgroupBox.Location = new System.Drawing.Point(856, 0);
             this.OperationsgroupBox.Name = "OperationsgroupBox";
-            this.OperationsgroupBox.Size = new System.Drawing.Size(231, 588);
+            this.OperationsgroupBox.Size = new System.Drawing.Size(231, 584);
             this.OperationsgroupBox.TabIndex = 4;
             this.OperationsgroupBox.TabStop = false;
             this.OperationsgroupBox.Text = "Operacje";
             // 
             // newUserbutton
             // 
-            this.newUserbutton.Location = new System.Drawing.Point(18, 93);
+            this.newUserbutton.Location = new System.Drawing.Point(18, 37);
             this.newUserbutton.Name = "newUserbutton";
             this.newUserbutton.Size = new System.Drawing.Size(201, 39);
             this.newUserbutton.TabIndex = 4;
@@ -74,39 +80,32 @@ namespace Delegacje_Służbowe
             this.newUserbutton.UseVisualStyleBackColor = true;
             this.newUserbutton.Click += new System.EventHandler(this.NewUserbutton_Click);
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(18, 51);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(201, 23);
-            this.textBox2.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Filtruj:";
-            // 
             // exportButton
             // 
-            this.exportButton.Location = new System.Drawing.Point(18, 183);
+            this.exportButton.Location = new System.Drawing.Point(18, 127);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(201, 39);
             this.exportButton.TabIndex = 1;
             this.exportButton.Text = "Exportuj do Excel";
             this.exportButton.UseVisualStyleBackColor = true;
+            this.exportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // printButton
             // 
-            this.printButton.Location = new System.Drawing.Point(18, 138);
+            this.printButton.Location = new System.Drawing.Point(18, 82);
             this.printButton.Name = "printButton";
             this.printButton.Size = new System.Drawing.Size(201, 39);
             this.printButton.TabIndex = 0;
             this.printButton.Text = "Exportuj do PDF";
             this.printButton.UseVisualStyleBackColor = true;
+            this.printButton.Click += new System.EventHandler(this.PrintButton_Click);
+            // 
+            // SearchTextBox
+            // 
+            this.SearchTextBox.Location = new System.Drawing.Point(61, 6);
+            this.SearchTextBox.Name = "SearchTextBox";
+            this.SearchTextBox.Size = new System.Drawing.Size(577, 23);
+            this.SearchTextBox.TabIndex = 3;
             // 
             // dataGridView1
             // 
@@ -124,22 +123,24 @@ namespace Delegacje_Służbowe
             this.created_at,
             this.updated_at});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(684, 588);
+            this.dataGridView1.Size = new System.Drawing.Size(850, 538);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView1_CellDoubleClick);
             this.dataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView1_MouseClick);
             // 
             // id
             // 
-            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.id.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.id.DataPropertyName = "id";
             this.id.HeaderText = "Id";
             this.id.Name = "id";
             this.id.ReadOnly = true;
+            this.id.Width = 30;
             // 
             // name
             // 
@@ -205,19 +206,75 @@ namespace Delegacje_Służbowe
             this.updated_at.Name = "updated_at";
             this.updated_at.ReadOnly = true;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(856, 584);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.FiltrLabel);
+            this.panel1.Controls.Add(this.FilterButton);
+            this.panel1.Controls.Add(this.SearchTextBox);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 547);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(850, 34);
+            this.panel1.TabIndex = 2;
+            // 
+            // FiltrLabel
+            // 
+            this.FiltrLabel.AutoSize = true;
+            this.FiltrLabel.Location = new System.Drawing.Point(9, 9);
+            this.FiltrLabel.Name = "FiltrLabel";
+            this.FiltrLabel.Size = new System.Drawing.Size(30, 15);
+            this.FiltrLabel.TabIndex = 6;
+            this.FiltrLabel.Text = "Filtr:";
+            // 
+            // FilterButton
+            // 
+            this.FilterButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.FilterButton.FlatAppearance.BorderSize = 0;
+            this.FilterButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FilterButton.Image = ((System.Drawing.Image)(resources.GetObject("FilterButton.Image")));
+            this.FilterButton.Location = new System.Drawing.Point(644, 1);
+            this.FilterButton.Name = "FilterButton";
+            this.FilterButton.Size = new System.Drawing.Size(31, 30);
+            this.FilterButton.TabIndex = 5;
+            this.FilterButton.UseVisualStyleBackColor = true;
+            this.FilterButton.Click += new System.EventHandler(this.FilterButton_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // UsersList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 588);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(1087, 584);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.OperationsgroupBox);
             this.Name = "UsersList";
             this.ShowIcon = false;
             this.Text = "Lista pracowników";
             this.OperationsgroupBox.ResumeLayout(false);
-            this.OperationsgroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -226,12 +283,16 @@ namespace Delegacje_Służbowe
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox OperationsgroupBox;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox SearchTextBox;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.Button printButton;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button newUserbutton;
+        public System.Windows.Forms.Button newUserbutton;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button FilterButton;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Label FiltrLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn surname;

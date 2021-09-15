@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using SqlKata.Compilers;
@@ -13,7 +9,7 @@ namespace Delegacje_Służbowe
 {
     public partial class ChangePassword : Form
     {
-        private int user_id;
+        private readonly int user_id;
 
         public ChangePassword(int user_id)
         {
