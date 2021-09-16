@@ -14,6 +14,11 @@
 - checking delegation date conflict
 - exemple mdf database
 
+## Instalation
+
+You have to install SQL Server Express with LocalDB. 
+You can install only LocalDB.
+
 ## Admin Access
 
 Login: admin
