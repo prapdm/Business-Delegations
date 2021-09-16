@@ -16,6 +16,7 @@ namespace Delegacje_Służbowe
         private readonly int user_id;
         private readonly SqlServerCompiler compiler;
         private readonly QueryFactory db;
+        private readonly dynamic user;
 
         public Permissions(int user_id)
         {
@@ -23,12 +24,13 @@ namespace Delegacje_Służbowe
              
             this.compiler =  new SqlServerCompiler();
             this.db = new QueryFactory(Program.conn.con, this.compiler);
+            this.user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
+
         }
 
         public void CheckUserListPermisions(UsersList usersList)
         {
-            var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
-
+            
             if (user != null)
             {
                 if (user.add_new_user == 0) usersList.newUserbutton.Enabled = false;
@@ -39,8 +41,7 @@ namespace Delegacje_Służbowe
 
         public void CheckDelegationPermisions(ShowDelegations showDelegations)
         {
-            var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
-
+       
             if (user != null)
             {
                 if (user.add_delegation == 0) showDelegations.newDelegationbutton.Enabled = false;
@@ -52,8 +53,7 @@ namespace Delegacje_Służbowe
         
        public void CheckDetailsRolesPermisions(DetailsRole detailsRole)
         {
-            var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
-
+           
             if (user != null)
             {
                 
@@ -65,8 +65,7 @@ namespace Delegacje_Służbowe
         }
         public void CheckRolesPermisions(Role role)
         {
-            var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
-
+          
             if (user != null)
             {
                 if (user.add_roles == 0) role.addDodaj.Enabled = false;
@@ -80,8 +79,7 @@ namespace Delegacje_Służbowe
 
         public void CheckDzialyPermisions(Dzialy dzialy)
         {
-            var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
-
+           
             if (user != null)
             {
                 if (user.add_departments  == 0) dzialy.addDodaj.Enabled = false;
@@ -93,8 +91,7 @@ namespace Delegacje_Służbowe
 
         public void CheckEditDelegationPermisions(EditDelegation editDelegation)
         {
-            var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
-
+           
             if (user != null)
             {
                 if (user.modify_delegation == 0) editDelegation.ZapiszDelegajcjebutton.Enabled = false;
@@ -105,8 +102,7 @@ namespace Delegacje_Służbowe
 
         public void CheckEditUserPermisions(EditUser editUser)
         {
-            var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
-
+          
             if (user != null)
             {
                 if (user.modify_user == 0) editUser.saveUserButton.Enabled = false;
@@ -119,8 +115,7 @@ namespace Delegacje_Służbowe
         public void CheckMainMenu(MainForm mainForm)
         {
        
-            var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Where("Users.Id", user_id).Where("status", 1).FirstOrDefault();
-
+            
             if (user != null)
             {
                      
