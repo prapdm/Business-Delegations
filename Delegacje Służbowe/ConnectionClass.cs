@@ -21,9 +21,32 @@ namespace Delegacje_Służbowe
         }
         private SqlConnection OpenConnection()
         {
-            con = new SqlConnection(connectionString);
-            con.Open();
+             
+            SqlConnection con = new SqlConnection(connectionString);
+
+            try
+            {
+                con.Open();
+                
+            }
+            catch (SqlException ex)
+            {
+                DisplaySqlErrors(ex);
+            }
+
             return con;
+        }
+
+        private static void DisplaySqlErrors(SqlException exception)
+        {
+
+            string errors = "";
+            for (int i = 0; i < exception.Errors.Count; i++)
+            {
+                
+                errors+= "Index #" + i + "\n" + "Error: " + exception.Errors[i].ToString() + "\n";
+            }
+            MessageBox.Show(errors, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
 
