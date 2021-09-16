@@ -9,7 +9,7 @@ namespace Delegacje_Służbowe
     {
 
         public SqlConnection con;
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}\Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
 
         public ConnectionClass()
         {
