@@ -1,72 +1,57 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using SqlKata.Compilers;
-using SqlKata.Execution;
-using System.Diagnostics;
- 
 
-namespace Delegacje_Służbowe
+namespace Delegations
 {
     public partial class LoginForm : Form
     {
-        public static int loged_user;
+        private readonly ILoger loger = new ConsoleLoger();
+
+
         public LoginForm()
         {
             InitializeComponent();
-            
-        }
+            IConnection db_con = new LocalDB();
+            var con = db_con.Connect();
 
-
-
-        private void LoginButton_Click(object sender, EventArgs e)
-        {
-            
-            string login = this.loginTextBox.Text;
-            string passowrd = this.passwordTextBox.Text;
-
-            var verify_password = new User();
-
-            var compiler = new SqlServerCompiler();
-            var db = new QueryFactory(Program.conn.con, compiler);
-
-            var user =  db.Query("Users").Where("status", 1).Where("login", login).FirstOrDefault();
-
-            if (user != null)
+            if (db_con.Status(con))
             {
-
-                if (verify_password.VerifyPassword(passowrd, user.password))
-                {
-
-                    Debug.WriteLine("Autoryzacja poprawna");
-                    loged_user = user.Id;
-                    this.Hide();
-                    MainForm mainform = new MainForm();
-                    mainform.ShowDialog();
-                    this.Close();
-
-                }
-                else
-                {
-                    Debug.WriteLine("Niepoprawne dane autoryzujące");
-                    this.conectionStatusLabel.ForeColor = Color.Red;
-                    this.conectionStatusLabel.Text = "Niepoprawne dane autoryzujące";
-                }
-
+                this.conectionStatusLabel.Text = "Połączono z bazą";
+                this.conectionStatusLabel.ForeColor = Color.Green;
+                db_con.Disconnect(con);
             }
             else
             {
-                Debug.WriteLine("Dane autoryzujące nie poprawne.");
+                this.conectionStatusLabel.Text = "Brak połączenia z bazą";
                 this.conectionStatusLabel.ForeColor = Color.Red;
-                this.conectionStatusLabel.Text = "Niepoprawne dane autoryzujące";
             }
 
+        }
 
 
+        private void LoginButton_Click(object sender, EventArgs e)
+        { 
+            string login = this.loginTextBox.Text;
+            string passowrd = this.passwordTextBox.Text;
+            string msg;
 
+            var autenticate = new Autentication();
+ 
+            if (autenticate.Login(login, passowrd))
+            {
+                this.Hide();
+                var mainform = new MainForm(autenticate.GetID());
+                mainform.FormClosed += (s, args) => this.Close();
+                loger.Write("Autoryzacja poprawna");                 
+
+            } else
+            {
+                msg = "Niepoprawne dane autoryzujące";
+                loger.Write(msg);
+                this.conectionStatusLabel.ForeColor = Color.Red;
+                this.conectionStatusLabel.Text = msg;
             }
-
-      
+        } 
     }
-    }
+}

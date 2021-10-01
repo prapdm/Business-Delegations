@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Delegacje_Służbowe</RootNamespace>
+    <RootNamespace>Delegations</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <ApplicationIcon>delegacje.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
@@ -11,6 +11,7 @@
     <Description>Simpy program for business delegations</Description>
     <Copyright>MIT Free Software</Copyright>
     <Company>avenus.pl</Company>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

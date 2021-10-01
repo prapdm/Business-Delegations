@@ -3,12 +3,12 @@ using System.Windows.Forms;
 
 
 
-namespace Delegacje_Służbowe
+namespace Delegations
 {
     class ConnectionClass
     {
 
-        public SqlConnection con;
+        public System.Data.SqlClient.SqlConnection con;
         string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
 
         public ConnectionClass()
@@ -19,10 +19,10 @@ namespace Delegacje_Służbowe
             }
 
         }
-        private SqlConnection OpenConnection()
+        private System.Data.SqlClient.SqlConnection OpenConnection()
         {
-             
-            SqlConnection con = new SqlConnection(connectionString);
+
+            System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(connectionString);
 
             try
             {

@@ -4,7 +4,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using System.Windows.Forms;
 
-namespace Delegacje_Służbowe
+namespace Delegations
 {
     class ExportClass
     {
@@ -103,7 +103,7 @@ namespace Delegacje_Służbowe
         }
 
 
-            public void PrintPDF()
+        public void PrintPDF()
         {
 
 

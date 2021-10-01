@@ -1,91 +1,116 @@
-﻿using System;
+﻿using SqlKata.Compilers;
+using SqlKata.Execution;
+using System;
 using System.Windows.Forms;
 
-namespace Delegacje_Służbowe
+namespace Delegations
 {
     public partial class MainForm : Form
     {
-        
-
-        public MainForm()
+        private readonly int loged_user;
+        public MainForm(int loged_user_id)
         {
             InitializeComponent();
-            Permissions permissions = new Permissions(LoginForm.loged_user );
-            permissions.CheckMainMenu(this);
-            
+            this.Show();
+            this.loged_user = loged_user_id;
+            ChekMenuAccess();
         }
 
-        ~MainForm()
+        private void ChekMenuAccess()
         {
-            Program.conn.Dispose();
+            var user = new Users().Find(loged_user);
+
+            if (user != null)
+            {
+                foreach (ToolStripMenuItem item in this.MainMenuStrip.Items)
+                {
+                    foreach (ToolStripItem subitem in item.DropDownItems)
+                    {
+                        if (subitem.Name.Contains("newDelegationStripMenuItem"))
+                            if (user.add_delegation == 0) subitem.Enabled = false;
+
+                        if (subitem.Name.Contains("openDelegationsStripMenuItem"))
+                            if (user.view_delegation == 0) subitem.Enabled = false;
+
+                        if (subitem.Name.Contains("nowyPracownikToolStripMenuItem"))
+                            if (user.add_new_user == 0) subitem.Enabled = false;
+
+                        if (subitem.Name.Contains("listaPracownikówToolStripMenuItem"))
+                            if (user.view_users == 0) subitem.Enabled = false;
+
+                        if (subitem.Name.Contains("działyToolStripMenuItem"))
+                            if (user.view_departments == 0) subitem.Enabled = false;
+
+                        if (subitem.Name.Contains("roleToolStripMenuItem"))
+                            if (user.view_roles == 0) subitem.Enabled = false;
+
+                    }
+                }
+            }
+            else this.Close();
         }
+
 
         private void NewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new NewDelegation();
+            new NewDelegationForm();
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.conn.Dispose();
             this.Close();
         }
 
         private void ListaPracownikówToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UsersList userslist= new UsersList();
-            userslist.MdiParent = this;
-            userslist.Show();
-
+            new UsersListForm(loged_user);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             Timer timer1 = new Timer();
-            timer1.Interval = 1000;//1 seconds
+            timer1.Interval = 1000;
             timer1.Tick += new EventHandler(Timer1_Tick);
             timer1.Enabled = true;
-            timer1.Start();
-
-            
+            timer1.Start(); 
         }
 
         private void Timer1_Tick(object Sender, EventArgs e)
-        {
-            // Set the caption to the current time.  
-           
+        {          
             toolStripStatusLabel1.Text = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
         }
 
         private void PasswordChangeStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ChangePassword(LoginForm.loged_user);
+            new ChangePasswordForm(loged_user);
         }
 
         private void NowyPracownikToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new NewUser();
+            new NewUserForm();
         }
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            new AboutBox1();
+            new AboutBox();
         }
 
         private void DziałyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Dzialy();
+            new DepartmentsForm(loged_user);
         }
 
         private void RoleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new Role();
+            new RoleForm(loged_user);
         }
 
         private void OpenDelegationsStripMenuItem_Click(object sender, EventArgs e)
         {
-            new ShowDelegations();
+            new ShowDelegationsForm(loged_user);
         }
+
+
     }
 }
