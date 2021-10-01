@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Delegations;
-using SqlKata.Compilers;
-using SqlKata.Execution;
 
 namespace Delegations
 {

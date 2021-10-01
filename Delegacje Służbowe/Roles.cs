@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Delegations.Interfaces;
+﻿using Delegations.Interfaces;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 
