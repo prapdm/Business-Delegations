@@ -1,11 +1,7 @@
-﻿using System;
-using System.Security.Cryptography;
-using SqlKata.Compilers;
+﻿using SqlKata.Compilers;
 using SqlKata.Execution;
-using System.Windows.Forms;
-using Delegations;
 using Delegations.Interfaces;
-using System.Collections.Generic;
+
 
 namespace Delegations
 {

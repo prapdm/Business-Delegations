@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
-using SqlKata.Compilers;
-using SqlKata.Execution;
-using Delegations;
 
 namespace Delegations
 {

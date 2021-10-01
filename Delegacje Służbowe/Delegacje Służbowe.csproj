@@ -37,6 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DataBase\" />
+    <Folder Include="Tests\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 

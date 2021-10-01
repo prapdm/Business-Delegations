@@ -1,6 +1,4 @@
-﻿using SqlKata.Compilers;
-using SqlKata.Execution;
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Delegations
