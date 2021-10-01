@@ -1,5 +1,5 @@
 ﻿
-namespace Delegacje_Służbowe
+namespace Delegations
 {
     partial class MainForm
     {
@@ -216,7 +216,7 @@ namespace Delegacje_Służbowe
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        public System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newDelegationStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openDelegationsStripMenuItem;

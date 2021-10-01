@@ -1,5 +1,5 @@
 ﻿
-namespace Delegacje_Służbowe
+namespace Delegations
 {
     partial class LoginForm
     {
@@ -103,7 +103,7 @@ namespace Delegacje_Służbowe
             this.conectionStatusLabel.TabIndex = 6;
             this.conectionStatusLabel.Text = "Łączenie z bazą danych ...";
             // 
-            // Form1
+            // LoginForm
             // 
             this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -119,10 +119,9 @@ namespace Delegacje_Służbowe
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Logowanie operatora";
-           
             this.ResumeLayout(false);
             this.PerformLayout();
 
