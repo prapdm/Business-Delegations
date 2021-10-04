@@ -121,14 +121,14 @@ namespace Delegations
 
         private void PrintButton_Click(object sender, EventArgs e)
         {
-            ExportClass export = new ExportClass(this.dataGridView1, "delegations");
-            export.PrintPDF();
+            ExportToFile export = new ExportToFile(this.dataGridView1, "users", new SaveToPDF());
+            export.Save();
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
         {
-            ExportClass export = new ExportClass(this.dataGridView1, "delegations");
-            export.ExportCSV();
+            ExportToFile export = new ExportToFile(this.dataGridView1, "users", new SaveToCSV());
+            export.Save();
         }
 
         private void DataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

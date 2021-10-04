@@ -7,13 +7,14 @@ namespace Delegations
     public partial class LoginForm : Form
     {
         private readonly ILoger loger = new ConsoleLoger();
+        private readonly string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
 
 
         public LoginForm()
         {
             InitializeComponent();
             IConnection db_con = new LocalDB();
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionString);
 
             if (db_con.Status(con))
             {

@@ -1,19 +1,21 @@
 ﻿using SqlKata.Compilers;
 using SqlKata.Execution;
 using Delegations.Interfaces;
-
+using System.Windows.Forms;
 
 namespace Delegations
 {
-    class Users : IDataBase
+    public class Users : IDataBase
     {
 
         private readonly IConnection db_con = new LocalDB();
-        
+        private readonly string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
+
+ 
 
         public int Delete(int user_id)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
 
             int affected = db.Query("Users").Where("Id", user_id).Delete();
@@ -26,7 +28,7 @@ namespace Delegations
         public dynamic Filter(dynamic fields)
         {
             IConnection db_con = new LocalDB();
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             string word = fields.word;
             var users = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Where(q =>
@@ -44,7 +46,7 @@ namespace Delegations
         public dynamic Find(int user_id)
         {
             IConnection db_con = new LocalDB();
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var user = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Where("Users.Id", user_id).FirstOrDefault();
             db_con.Disconnect(con);
@@ -53,7 +55,7 @@ namespace Delegations
 
         public int Add(object data)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var row_id = db.Query("Users").InsertGetId<int>(data);
             db_con.Disconnect(con);
@@ -62,7 +64,7 @@ namespace Delegations
 
         public dynamic Get()
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var users = db.Query("Users").Join("Roles", "Roles.Id", "Users.role").Join("Departments", "Departments.Id", "Users.department").Get();
             db_con.Disconnect(con);
@@ -72,7 +74,7 @@ namespace Delegations
 
         public int Update(object data, int user_id)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var affected = db.Query("Users").Where("Id", user_id).Update(data);
             db_con.Disconnect(con);

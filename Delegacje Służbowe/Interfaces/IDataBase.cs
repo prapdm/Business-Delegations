@@ -4,7 +4,7 @@ namespace Delegations.Interfaces
     interface IDataBase
     {
         int Add(object data);
-        int  Delete(int row_id);
+        int Delete(int row_id);
 
         dynamic Get();
 

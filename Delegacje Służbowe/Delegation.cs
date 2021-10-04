@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using Delegations.Interfaces;
 using SqlKata.Compilers;
 using SqlKata.Execution;
@@ -8,12 +9,13 @@ namespace Delegations
     public class Delegation : IDataBase
     {
         private readonly IConnection db_con = new LocalDB();
- 
+        private readonly string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
+
 
 
         public int Add(object data)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var row_id = db.Query("Delegations").InsertGetId<int>(data);
             db_con.Disconnect(con);
@@ -22,7 +24,7 @@ namespace Delegations
 
         public int Delete(int row_id)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             int affected = db.Query("Delegations").Where("Id", row_id).Delete();
             db_con.Disconnect(con);
@@ -32,7 +34,7 @@ namespace Delegations
         public dynamic Filter(dynamic fields)
         {
             IConnection db_con = new LocalDB();
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             if (fields.user_id == 0)
             {
@@ -73,7 +75,7 @@ namespace Delegations
         public dynamic Find(int row_id)
         {
             IConnection db_con = new LocalDB();
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var delegation = db.Query("Delegations").Where("Id", row_id).FirstOrDefault();
             db_con.Disconnect(con);
@@ -82,7 +84,7 @@ namespace Delegations
 
         public dynamic Get()
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var  from_date = DateTime.Today.AddMonths(-12);
             var to_date = DateTime.Today.AddMonths(1);
@@ -95,7 +97,7 @@ namespace Delegations
 
         public int Update(object data, int row_id)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var affected = db.Query("Delegations").Where("Id", row_id).Update(data);
             db_con.Disconnect(con);

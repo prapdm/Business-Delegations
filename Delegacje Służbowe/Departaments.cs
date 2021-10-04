@@ -2,6 +2,7 @@
 using SqlKata.Compilers;
 using SqlKata.Execution;
 using System;
+using System.Windows.Forms;
 
 namespace Delegations
 {
@@ -9,13 +10,14 @@ namespace Delegations
     {
 
         private readonly IConnection db_con = new LocalDB();
+        private readonly string connectionstring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
 
 
 
 
         public int Add(object data)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var row_id = db.Query("Departments").InsertGetId<int>(data);
             db_con.Disconnect(con);
@@ -24,7 +26,7 @@ namespace Delegations
 
         public int  Delete(int row_id)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             int affected = db.Query("Departments").Where("Id", row_id).Delete();
             db_con.Disconnect(con);
@@ -34,7 +36,7 @@ namespace Delegations
         public dynamic Filter(dynamic fields)
         {
             IConnection db_con = new LocalDB();
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             string word = fields.word;
             var departament = db.Query("Departments").Where(q =>
@@ -48,7 +50,7 @@ namespace Delegations
         public dynamic Find(int row_id)
         {
             IConnection db_con = new LocalDB();
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var departament = db.Query("Departments").Where("Departments.Id", row_id).FirstOrDefault();
             db_con.Disconnect(con);
@@ -58,7 +60,7 @@ namespace Delegations
         public int GetIdByName(string word)
         {
             IConnection db_con = new LocalDB();
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var departament = db.Query("Departments").Where("full_name", word).FirstOrDefault();
             db_con.Disconnect(con);
@@ -70,7 +72,7 @@ namespace Delegations
 
         public dynamic Get()
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var departments = db.Query("Departments").Get();
             db_con.Disconnect(con);
@@ -79,7 +81,7 @@ namespace Delegations
 
         public int Update(object data, int row_id)
         {
-            var con = db_con.Connect();
+            var con = db_con.Connect(connectionstring);
             var db = new QueryFactory(con, new SqlServerCompiler());
             var affected = db.Query("Departments").Where("Id", row_id).Update(data);
             db_con.Disconnect(con);
