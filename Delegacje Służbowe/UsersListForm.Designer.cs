@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace Delegations
 {
     partial class UsersListForm
@@ -276,6 +278,14 @@ namespace Delegations
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+
+            this.MdiParent = MainForm.ActiveForm;
+            this.Show();
+            this.dataGridView1.AutoGenerateColumns = false;
+
+            this.m = new ContextMenuStrip();
+            m.Items.Add("Odśwież");
+            m.Items.Add("Pokaż");
 
         }
 

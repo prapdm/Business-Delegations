@@ -8,10 +8,9 @@ namespace Delegations
     public class LocalDB : IConnection
     {
      
-        private readonly string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + $@"{Application.StartupPath}Database.mdf;" + @"Integrated Security=True;Connect Timeout=30";
+      
 
-
-        public SqlConnection Connect()
+        public SqlConnection Connect(string connectionString)
         {
             var con = new SqlConnection(connectionString);
             try

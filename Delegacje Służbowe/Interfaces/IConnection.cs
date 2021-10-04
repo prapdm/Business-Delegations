@@ -3,10 +3,12 @@ using System.Data.SqlClient;
 
 namespace Delegations
 {
-    interface IConnection
+
+
+    public  interface IConnection
     {
         Boolean Status(SqlConnection con);
-        SqlConnection Connect();
+        SqlConnection Connect(string connectionstring);
         void Disconnect(SqlConnection con);
 
     }

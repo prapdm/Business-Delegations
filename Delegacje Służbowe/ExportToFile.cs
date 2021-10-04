@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Delegations
 {
-    class ExportToFile
+    public class ExportToFile
     {
         private readonly DataGridView dataGridView;
         private readonly string filename;
@@ -18,9 +18,9 @@ namespace Delegations
             this.dataSaver = dataSaver;
         }
 
-        public void Save()
+        public Boolean Save()
         {
-            dataSaver.Save(this.dataGridView, this.filename);
+            return dataSaver.Save(this.dataGridView, this.filename);
         }
 
     }
